@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎬 Analyseur de Sentiment - Films</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            padding: 20px; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .container { 
+            max-width: 800px; 
+            margin: 0 auto; 
+            background: rgba(255,255,255,0.1); 
+            padding: 20px; 
+            border-radius: 10px; 
+        }
+        h1 { text-align: center; }
+        button { 
+            padding: 10px 20px; 
+            background: #48bb78; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer;
+            margin: 10px;
+        }
+        button:hover { background: #38a169; }
+        #result { 
+            margin-top: 20px; 
+            padding: 20px; 
+            background: rgba(255,255,255,0.1); 
+            border-radius: 5px; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎬 Analyseur de Sentiment pour Films</h1>
+        <p>Application de hackathon utilisant MongoDB + Google Cloud</p>
+        
+        <button onclick="loadData()">🎭 Charger des films</button>
+        <button onclick="showStats()">📊 Voir les statistiques</button>
+        
+        <div id="result">
+            <p>Cliquez sur un bouton pour commencer !</p>
+        </div>
+    </div>
+
+    <script>
+        function loadData() {
+            document.getElementById('result').innerHTML = '<p>Chargement des films...</p>';
+            
+            // Simulation de données
+            setTimeout(() => {
+                document.getElementById('result').innerHTML = `
+                    <h3>Films trouvés :</h3>
+                    <div style="background: rgba(72, 187, 120, 0.2); padding: 15px; margin: 10px 0; border-radius: 5px;">
+                        <strong>The Shawshank Redemption (1994)</strong><br>
+                        Sentiment: 😊 Positif (0.8)<br>
+                        Description: Two imprisoned men bond over a number of years...
+                    </div>
+                    <div style="background: rgba(245, 101, 101, 0.2); padding: 15px; margin: 10px 0; border-radius: 5px;">
+                        <strong>The Dark Knight (2008)</strong><br>
+                        Sentiment: 😞 Négatif (-0.3)<br>
+                        Description: When the menace known as the Joker wreaks havoc...
+                    </div>
+                `;
+            }, 1000);
+        }
+        
+        function showStats() {
+            document.getElementById('result').innerHTML = `
+                <h3>📊 Statistiques d'analyse :</h3>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0;">
+                    <div style="background: rgba(72, 187, 120, 0.3); padding: 15px; text-align: center; border-radius: 5px;">
+                        <h2>45</h2>
+                        <p>Sentiments Positifs</p>
+                    </div>
+                    <div style="background: rgba(245, 101, 101, 0.3); padding: 15px; text-align: center; border-radius: 5px;">
+                        <h2>15</h2>
+                        <p>Sentiments Négatifs</p>
+                    </div>
+                    <div style="background: rgba(237, 137, 54, 0.3); padding: 15px; text-align: center; border-radius: 5px;">
+                        <h2>40</h2>
+                        <p>Sentiments Neutres</p>
+                    </div>
+                </div>
+                <p><strong>Total : 100 films analysés</strong></p>
+            `;
+        }
+    </script>
+</body>
+</html>
