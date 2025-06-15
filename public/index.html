@@ -4,95 +4,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🎬 Analyseur de Sentiment - Films</title>
-    <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            margin: 0; 
-            padding: 20px; 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-        .container { 
-            max-width: 800px; 
-            margin: 0 auto; 
-            background: rgba(255,255,255,0.1); 
-            padding: 20px; 
-            border-radius: 10px; 
-        }
-        h1 { text-align: center; }
-        button { 
-            padding: 10px 20px; 
-            background: #48bb78; 
-            color: white; 
-            border: none; 
-            border-radius: 5px; 
-            cursor: pointer;
-            margin: 10px;
-        }
-        button:hover { background: #38a169; }
-        #result { 
-            margin-top: 20px; 
-            padding: 20px; 
-            background: rgba(255,255,255,0.1); 
-            border-radius: 5px; 
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>🎬 Analyseur de Sentiment pour Films</h1>
-        <p>Application de hackathon utilisant MongoDB + Google Cloud</p>
-        
-        <button onclick="loadData()">🎭 Charger des films</button>
-        <button onclick="showStats()">📊 Voir les statistiques</button>
-        
-        <div id="result">
-            <p>Cliquez sur un bouton pour commencer !</p>
+    <header>
+        <div class="container">
+            <h1>🎬 Analyseur de Sentiment pour Films</h1>
+            <p>Analyse IA des sentiments dans les descriptions de films avec MongoDB + Google Cloud</p>
         </div>
-    </div>
+    </header>
 
-    <script>
-        function loadData() {
-            document.getElementById('result').innerHTML = '<p>Chargement des films...</p>';
-            
-            // Simulation de données
-            setTimeout(() => {
-                document.getElementById('result').innerHTML = `
-                    <h3>Films trouvés :</h3>
-                    <div style="background: rgba(72, 187, 120, 0.2); padding: 15px; margin: 10px 0; border-radius: 5px;">
-                        <strong>The Shawshank Redemption (1994)</strong><br>
-                        Sentiment: 😊 Positif (0.8)<br>
-                        Description: Two imprisoned men bond over a number of years...
-                    </div>
-                    <div style="background: rgba(245, 101, 101, 0.2); padding: 15px; margin: 10px 0; border-radius: 5px;">
-                        <strong>The Dark Knight (2008)</strong><br>
-                        Sentiment: 😞 Négatif (-0.3)<br>
-                        Description: When the menace known as the Joker wreaks havoc...
-                    </div>
-                `;
-            }, 1000);
-        }
-        
-        function showStats() {
-            document.getElementById('result').innerHTML = `
-                <h3>📊 Statistiques d'analyse :</h3>
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0;">
-                    <div style="background: rgba(72, 187, 120, 0.3); padding: 15px; text-align: center; border-radius: 5px;">
-                        <h2>45</h2>
-                        <p>Sentiments Positifs</p>
-                    </div>
-                    <div style="background: rgba(245, 101, 101, 0.3); padding: 15px; text-align: center; border-radius: 5px;">
-                        <h2>15</h2>
-                        <p>Sentiments Négatifs</p>
-                    </div>
-                    <div style="background: rgba(237, 137, 54, 0.3); padding: 15px; text-align: center; border-radius: 5px;">
-                        <h2>40</h2>
-                        <p>Sentiments Neutres</p>
-                    </div>
+    <main class="container">
+        <!-- Section statistiques -->
+        <section class="stats-section">
+            <h2>📊 Statistiques Globales</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalMovies">-</div>
+                    <div class="stat-label">Films analysés</div>
                 </div>
-                <p><strong>Total : 100 films analysés</strong></p>
-            `;
-        }
-    </script>
+                <div class="stat-card positive">
+                    <div class="stat-number" id="positiveCount">-</div>
+                    <div class="stat-label">Sentiments positifs</div>
+                </div>
+                <div class="stat-card negative">
+                    <div class="stat-number" id="negativeCount">-</div>
+                    <div class="stat-label">Sentiments négatifs</div>
+                </div>
+                <div class="stat-card neutral">
+                    <div class="stat-number" id="neutralCount">-</div>
+                    <div class="stat-label">Sentiments neutres</div>
+                </div>
+            </div>
+            
+            <!-- Graphique -->
+            <div class="chart-container">
+                <canvas id="sentimentChart"></canvas>
+            </div>
+        </section>
+
+        <!-- Section recherche -->
+        <section class="search-section">
+            <h2>🔍 Recherche et Analyse</h2>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Rechercher un film ou genre (ex: action, comedy, horror)...">
+                <button id="searchBtn">Rechercher</button>
+                <button id="loadRandomBtn">Films Aléatoires</button>
+            </div>
+        </section>
+
+        <!-- Section résultats -->
+        <section class="results-section">
+            <h2>🎭 Résultats d'Analyse</h2>
+            <div id="loadingSpinner" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>Analyse en cours...</p>
+            </div>
+            <div id="moviesGrid" class="movies-grid"></div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>🚀 Hackathon Google Cloud x MongoDB | Analyse de sentiment avec IA</p>
+            <div class="tech-stack">
+                <span class="tech-tag">MongoDB Atlas</span>
+                <span class="tech-tag">Google Cloud AI</span>
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">Vector Search</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
