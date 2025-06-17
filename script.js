@@ -90,7 +90,36 @@ const movieDatabase = [
         plot: "A grieving family is haunted by tragedy and disturbing secrets.",
         genres: ["Drama", "Horror", "Mystery"],
         sentiment: { sentiment: 'negative', score: -0.8 }
+    },
+    {
+        title: "The Babadook",
+        year: 2014,
+        plot: "A single mother and her son fall into a deep well of paranoia when a disturbing storybook called 'Mister Babadook' manifests in their home.",
+        genres: ["Drama", "Horror", "Thriller"],
+        sentiment: { sentiment: 'negative', score: -0.75 }
+    },
+    {
+        title: "Midsommar",
+        year: 2019,
+        plot: "A couple travels to Sweden to visit a rural hometown's fabled mid-summer festival, but what begins as an idyllic retreat quickly devolves into an increasingly violent and bizarre competition.",
+        genres: ["Drama", "Horror", "Mystery"],
+        sentiment: { sentiment: 'negative', score: -0.85 }
+    },
+    {
+        title: "The Witch",
+        year: 2015,
+        plot: "In 1630s New England, panic and despair envelop a farmer's family when their youngest son vanishes and the family suspects supernatural forces.",
+        genres: ["Horror", "Mystery", "Thriller"],
+        sentiment: { sentiment: 'negative', score: -0.9 }
+    },
+    {
+        title: "It Follows",
+        year: 2014,
+        plot: "A young woman is followed by an unknown supernatural force after a sexual encounter, forcing her into a haunting cycle of paranoia and fear.",
+        genres: ["Horror", "Mystery", "Thriller"],
+        sentiment: { sentiment: 'negative', score: -0.65 }
     }
+
 ];
 
 // Initialisation de l'application
